@@ -1,0 +1,22 @@
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      # deals with single and multi-valued JWT claims
+      accept-single-value-as-array: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${acme.jwt.issuerUri}
+          jwk-set-uri: ${acme.jwt.issuerUri}/protocol/openid-connect/certs
+# Use mock-service jwks-endpoint to obtain public key for testing
+#          jwk-set-uri: http://localhost:9999/jwks
+
+acme:
+  jwt:
+    issuerUri: http://127.0.0.1:8080/realms/bidv-realm
+
+server:
+  port : 8081
